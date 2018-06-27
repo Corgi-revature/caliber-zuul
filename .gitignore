@@ -85,5 +85,5 @@ Servers/
 
 # End of https://www.gitignore.io/api/eclipse
 
-/caliber-zuul/target/
+/target/
 
