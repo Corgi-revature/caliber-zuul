@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.validation.constraints.Min;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -53,7 +51,6 @@ public class Batch implements Serializable {
 	 * Anything above this grade but below goodGradeThreshold is YELLOW Anything
 	 * below this grade is RED
 	 */
-	@Min(value = 1)
 	private short borderlineGradeThreshold;
 
 	@JsonManagedReference(value = "traineeAndBatch")
