@@ -26,6 +26,8 @@ public class Trainer implements Serializable {
 
 	private TrainerRole tier;
 
+	private String password;
+	
 	private Set<Batch> batches;
 	
 	public Trainer() {
@@ -87,6 +89,15 @@ public class Trainer implements Serializable {
 	public void setBatches(Set<Batch> batches) {
 		this.batches = batches;
 	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 	/*
 	 * public Set<TrainerTaskCompletion> getEvaluations() { return evaluations;
 	 * }
