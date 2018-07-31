@@ -1,0 +1,16 @@
+version: 0.2
+
+  env:
+    parameter-store:
+      dockerUser: dockerUser
+      dockerPassword: dockerPassword
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - mvn clean dockerfile:build -Dmaven.test.skip=true 
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - mvn deploy -Dmaven.test.skip=true -Ddockerfile.username=dockerUser  -Ddockerfile.password=dockerPassword
