@@ -111,7 +111,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<mainClass>
-						com.revature.caliber.zuul.Application</mainClass>
+						com.revature.caliber.zuul.ZuulAPIGatewayApplication</mainClass>
 					<addResources>true</addResources>
 				</configuration>
 				<executions>
