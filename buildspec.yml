@@ -1,16 +1,28 @@
 version: 0.2
 
-  env:
-    parameter-store:
-      dockerUser: dockerUser
-      dockerPassword: dockerPassword
-  build:
-    commands:
-      - echo Build started on `date`
-      - echo Building the Docker image...          
-      - mvn clean dockerfile:build -Dmaven.test.skip=true 
-  post_build:
-    commands:
+env: 
+  parameter-store: 
+    PASSWORD: dockerPassword
+    USERNAME: dockerUser
+phases:
+  install: 
+    commands: 
+      - apt-get update -y 
+      - apt-get install -y software-properties-common
+      - add-apt-repository ppa:openjdk-r/ppa
+      - apt-get update -y 
+      - apt-get install -y openjdk-8-jdk 
+      - apt-get install -y maven 
+      - echo downloading ojdbc6 ...
+      - aws s3 cp s3://sierra-bucket/ojdbc6.jar .
+      - echo installing ojdbc6 ...
+      - mvn install:install-file -Dfile=ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar
+  post_build: 
+    commands: 
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - mvn deploy -Dmaven.test.skip=true -Ddockerfile.username=dockerUser  -Ddockerfile.password=dockerPassword
+      - mvn deploy -Dmaven.test.skip=true -Ddockerfile.username=$USERNAME  -Ddockerfile.password=$PASSWORD
+      - echo '[{"name":"revaturesierra","imageUri":"revaturesierrra/caliber-zuul"}]' > image.json
+artifacts:
+  files: image.json
+
