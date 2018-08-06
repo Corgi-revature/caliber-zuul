@@ -1,9 +1,6 @@
 FROM openjdk:8-jre
 
-CMD ["/wait.sh"]
+ENTRYPOINT ["/usr/bin/java", "-jar", "/service.jar"]
 
 ARG JAR_FILE
-
-COPY target/${JAR_FILE} /service.jar
-COPY scripts/wait.sh /wait.sh
-
+ADD target/${JAR_FILE} /service.jar
