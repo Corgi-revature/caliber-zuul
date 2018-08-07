@@ -22,7 +22,7 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - mvn deploy -Dmaven.test.skip=true -Ddockerfile.username=$USERNAME  -Ddockerfile.password=$PASSWORD
-      - echo '[{"name":"revaturesierra","imageUri":"revaturesierrra/caliber-zuul"}]' > image.json
+      - echo '[{"name":"CaliberZuul","imageUri":"revaturesierra/caliber-zuul"}]' > image.json
 artifacts:
   files: image.json
 
