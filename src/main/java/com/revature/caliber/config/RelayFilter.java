@@ -15,7 +15,13 @@ import com.revature.caliber.zuul.security.JwtConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
-
+/**
+ * This filter intercepts incoming requests in order to decode the JWT inside of the header into the parameters that the services use.
+ * It should check the headers of the request coming in in order to prevent unauthorized access by creating custom headers that contain
+ * the information that services expect.
+ * @authors Jack Hou,
+ *		Michael Underwood
+ */
 @Component
 public class RelayFilter extends ZuulFilter {
 	
@@ -35,7 +41,6 @@ public class RelayFilter extends ZuulFilter {
 		
 		@SuppressWarnings("unchecked")
 		Set<String> headers = (Set<String>) con.get("ignoredHeaders");
-		System.out.println(con.get("ignoredHeaders"));
 		
 		HttpServletRequest req = con.getRequest();
 		
@@ -55,10 +60,6 @@ public class RelayFilter extends ZuulFilter {
 			con.addZuulRequestHeader("trainer", user);
 			con.addZuulRequestHeader("role", roles.get(0));
 		}
-		
-		con.addZuulRequestHeader("fjfjfjfjf", "dfhdngfidfagirfde");
-		//headers.remove("authorization");
-		//System.out.println(con.get("ignoredHeaders"));
 		
 		return null;
 	}
