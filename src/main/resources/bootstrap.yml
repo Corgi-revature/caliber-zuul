@@ -5,3 +5,9 @@ spring:
     config:
       uri: ${CALIBER_CONFIG_SERVER_URL}
       fail-fast: true
+zuul:
+  routes:
+#    users:
+#      path: /training/**
+      sensitive-headers:   
+        
