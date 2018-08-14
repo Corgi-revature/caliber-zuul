@@ -17,8 +17,8 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 /**
  * This filter intercepts incoming requests in order to decode the JWT inside of the header into the parameters that the services use.
- * It should check the headers of the request coming in in order to prevent unauthorized access by creating custom headers that contain
- * the information that services expect.
+ * Checks if the custom headers already exist and denies the connection if they do, since they are nonstandard headers and should
+ * not exist unless the user is attempting to access roles they do not have.
  * @authors Jack Hou,
  *		Michael Underwood
  */
@@ -43,6 +43,15 @@ public class RelayFilter extends ZuulFilter {
 		Set<String> headers = (Set<String>) con.get("ignoredHeaders");
 		
 		HttpServletRequest req = con.getRequest();
+		
+		//If the message contains the custom headers we use treat it as an invalid message
+		//as it could be an attempt to gain access that the user does not have.
+		if (req.getHeader("trainer") != null || req.getHeader("role") != null) {
+			con.setResponseStatusCode(401);
+			con.setResponseBody("Invalid headers.");
+			con.setSendZuulResponse(false);
+			return null;
+		}
 		
 		//JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
 		
