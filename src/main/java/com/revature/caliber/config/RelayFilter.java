@@ -19,8 +19,8 @@ import io.jsonwebtoken.Jwts;
  * This filter intercepts incoming requests in order to decode the JWT inside of the header into the parameters that the services use.
  * Checks if the custom headers already exist and denies the connection if they do, since they are nonstandard headers and should
  * not exist unless the user is attempting to access roles they do not have.
- * @authors Jack Hou,
- *		Michael Underwood
+ * 
+ * @authors Jack Hou, Michael Underwood, Matthew Braithwaite, Wayne Williams
  */
 @Component
 public class RelayFilter extends ZuulFilter {
