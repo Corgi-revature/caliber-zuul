@@ -30,7 +30,6 @@ public class RelayFilter extends ZuulFilter {
 	
 	@Override
 	public boolean shouldFilter() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
@@ -53,10 +52,6 @@ public class RelayFilter extends ZuulFilter {
 			return null;
 		}
 		
-		//JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-		
-		//converter.setVerifierKey("JwtSecretKey");
-		
 		String token = req.getHeader("Authorization");
 		
 		if (token != null) {
@@ -75,13 +70,11 @@ public class RelayFilter extends ZuulFilter {
 
 	@Override
 	public String filterType() {
-		// TODO Auto-generated method stub
 		return "pre";
 	}
 
 	@Override
 	public int filterOrder() {
-		// TODO Auto-generated method stub
 		return 10000;
 	}
 
